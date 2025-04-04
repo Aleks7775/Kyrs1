@@ -1,9 +1,8 @@
 import logging
 import os
-from datetime import datetime
 from typing import Optional
-
 import pandas as pd
+
 
 file_ = os.path.dirname(os.path.abspath(__file__))
 file = os.path.join(file_, '..', 'data', 'operations.xlsx')
@@ -14,9 +13,6 @@ def read_df_excel(file):
     with open(file, 'r', encoding='utf-8'):
         operations_xls = pd.read_excel(file)
     return operations_xls
-
-
-transactions = read_df_excel(file)
 
 
 def spending_by_category(transactions: pd.DataFrame, category: str, date: Optional[str] = None) -> pd.DataFrame:
@@ -38,6 +34,3 @@ def spending_by_category(transactions: pd.DataFrame, category: str, date: Option
     ]
     logging.info(f"Найдено {len(filtered_transactions)} транзакций по категории '{category}' за последние три месяца.")
     return filtered_transactions
-
-
-print(spending_by_category(transactions, "Супермаркеты", "01.01.2019"))
