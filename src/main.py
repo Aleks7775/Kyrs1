@@ -10,28 +10,39 @@ import os
 file_ = os.path.dirname(os.path.abspath(__file__))
 file_xlsx = os.path.join(file_, '..', 'data', 'operations.xlsx')
 transactions = xlsx_file(file_xlsx)
+transaction = read_df_excel(file_xlsx)
 
 current_datetime = datetime.datetime.now()
 formatted_datetime = int(current_datetime.strftime("%H"))
 
-"""Веб-страницы: Главная"""
-greetings = time_(formatted_datetime)
-date_input = "05.01.2018 10:10:10"
-data = date_entry(transactions, date_input)
-cards_dict = processing(data)
-top_transactions = top_transaction(data)
-currency = currency_and_shares()
-stocks_prices = share_price()
-json_ = {"greetings": greetings, "cards": cards_dict, "top_transactions": top_transactions,"currency_rates": currency,"stocks_price": stocks_prices}
-js_ = json.dumps(json_, ensure_ascii=False, indent=4)
-# print(js_)
 
-"""Сервисы: Выгодные категории повышенного кешбэка"""
-filtration = increased_cashback(transactions, 2020, 10)
-result = cash_by_category(filtration)
-json_data = json.dumps(result, ensure_ascii=False, indent=4)
-# print(json_data)
+def main(date_input="05.01.2018 10:10:10"):
+    greetings = time_(formatted_datetime)
+    data = date_entry(transactions, date_input)
+    cards_dict = processing(data)
+    top_transactions = top_transaction(data)
+    currency = currency_and_shares()
+    stocks_prices = share_price()
+    json_ = {"greetings": greetings, "cards": cards_dict, "top_transactions": top_transactions,
+             "currency_rates": currency, "stocks_price": stocks_prices}
+    json_answer = json.dumps(json_, ensure_ascii=False, indent=4)
+    return json_answer
 
-"""Отчеты Траты по категории, Функция возвращает траты по заданной категории за последние три месяца (от переданной даты)"""
-transaction = read_df_excel(file_xlsx)
-# print(spending_by_category(transaction, "Супермаркеты", "01.01.2019"))
+
+def services(year=2020, month=10):
+    filtration = increased_cashback(transactions, year, month)
+    result = cash_by_category(filtration)
+    json_data = json.dumps(result, ensure_ascii=False, indent=4)
+    return json_data
+
+
+def reports_by_category(category="Супермаркеты", date="01.01.2019"):
+    reports = spending_by_category(transaction, category, date)
+    return reports
+
+if __name__ == "__main__":
+    main()
+    services_data = services(year=2020, month=10)
+    print(services_data)
+    reports_data = reports_by_category(category="Супермаркеты", date="01.01.2019")
+    print(reports_data)
