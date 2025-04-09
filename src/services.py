@@ -1,4 +1,5 @@
 import datetime
+
 from datetime import datetime
 
 
@@ -6,7 +7,7 @@ def increased_cashback(transactions, year, month):
     """Функция фильтрует данные за год и месяц"""
     filtered_data = [transaction for transaction in transactions
                      if datetime.strptime(transaction['Дата операции'],'%d.%m.%Y %H:%M:%S').year == year
-                     and datetime.strptime(transaction['Дата операции'], '%d.%m.%Y %H:%M:%S').month == month]
+                     and datetime.strptime(transaction['Дата операции'],  '%d.%m.%Y %H:%M:%S').month == month]
     return filtered_data
 
 

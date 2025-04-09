@@ -1,8 +1,5 @@
-import datetime
 import json
 import os
-from operator import itemgetter
-import pandas as pd
 import requests
 from dotenv import load_dotenv
 

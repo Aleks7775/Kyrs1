@@ -1,7 +1,4 @@
-from unittest.mock import patch, mock_open, Mock
-import pytest
-import requests
-import json
+from unittest.mock import patch
 from src.utils import currency_and_shares, share_price
 
 

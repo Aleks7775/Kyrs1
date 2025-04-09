@@ -17,6 +17,7 @@ formatted_datetime = int(current_datetime.strftime("%H"))
 
 
 def main(date_input="05.01.2018 10:10:10"):
+    """Принимает на вход строку с датой и временем и возвращает JSON-ответ"""
     greetings = time_(formatted_datetime)
     data = date_entry(transactions, date_input)
     cards_dict = processing(data)
@@ -30,6 +31,7 @@ def main(date_input="05.01.2018 10:10:10"):
 
 
 def services(year=2020, month=10):
+    """Функция фильтрует данные за год и месяц и возвращает JSON-ответ"""
     filtration = increased_cashback(transactions, year, month)
     result = cash_by_category(filtration)
     json_data = json.dumps(result, ensure_ascii=False, indent=4)
@@ -37,8 +39,11 @@ def services(year=2020, month=10):
 
 
 def reports_by_category(category="Супермаркеты", date="01.01.2019"):
+    """Функция возвращает траты по заданной категории за последние три месяца (от переданной даты)
+     и возвращает JSON-ответ"""
     reports = spending_by_category(transaction, category, date)
     return reports
+
 
 if __name__ == "__main__":
     main()
