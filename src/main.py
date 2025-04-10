@@ -40,9 +40,10 @@ def services(year=2020, month=10):
 
 def reports_by_category(category="Супермаркеты", date="01.01.2019"):
     """Функция возвращает траты по заданной категории за последние три месяца (от переданной даты)
-     и возвращает JSON-ответ"""
+     и возвращает JSON-ответ а также записывает отчет в файл"""
     reports = spending_by_category(transaction, category, date)
-    return reports
+    json_reports = json.dumps(reports, ensure_ascii=False, indent=4)
+    return json_reports
 
 
 if __name__ == "__main__":
